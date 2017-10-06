@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="NavViewDemo.ShellPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavViewDemo"
+    xmlns:views="using:NavViewDemo.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <local:NavigationViewEx x:Name="MainView" SettingsPageType="views:SettingsPage">
+            
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox />
+            </NavigationView.AutoSuggestBox>
+            
+            <NavigationView.MenuItems>
+                <local:NavigationViewItemHeaderEx Content="" VisibleWhen="Narrow" />
+                <local:NavigationViewItemHeaderEx GroupName="MainGroup" Content="Group Header" VisibleWhen="Wide" />
+                <local:NavigationViewItemEx GroupName="MainGroup" Icon="Add" Content="Home 01 (Clears BackStack)" PageType="views:Page01" PageParameter="One" ClearBackStack="True" />
+                <local:NavigationViewItemEx GroupName="MainGroup" Icon="Add" Content="Some Page 02" PageType="views:Page02" PageParameter="Two" />
+                <NavigationViewItemSeparator />
+                <local:NavigationViewItemEx Icon="Add" Content="Some Page 03" PageType="views:Page03" PageParameter="Three" />
+                <local:NavigationViewItemEx Icon="Add" Content="Some Page 04" PageType="views:Page04" PageParameter="Four" />
+            </NavigationView.MenuItems>
+            
+            <NavigationView.PaneFooter>
+                <StackPanel>
+                    <NavigationViewItem Icon="Contact" Content="Profile" />
+                </StackPanel>
+            </NavigationView.PaneFooter>
+            
+        </local:NavigationViewEx>
+
+    </Grid>
+</Page>
