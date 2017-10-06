@@ -17,13 +17,12 @@
             </NavigationView.AutoSuggestBox>
             
             <NavigationView.MenuItems>
-                <local:NavigationViewItemHeaderEx Content="" VisibleWhen="Narrow" />
-                <local:NavigationViewItemHeaderEx GroupName="MainGroup" Content="Group Header" VisibleWhen="Wide" />
-                <local:NavigationViewItemEx GroupName="MainGroup" Icon="Add" Content="Home 01 (Clears BackStack)" PageType="views:Page01" PageParameter="One" ClearBackStack="True" />
-                <local:NavigationViewItemEx GroupName="MainGroup" Icon="Add" Content="Some Page 02" PageType="views:Page02" PageParameter="Two" />
+                <local:NavigationViewItemHeaderEx Content="Header 01" NarrowContent="01" />
+                <local:NavigationViewItemEx Icon="Home" Content="Home 01 (Clears BackStack)" PageType="views:Page01" PageParameter="One" ClearBackStack="True" />
+                <local:NavigationViewItemEx Icon="Accept" Content="Some Page 02" PageType="views:Page02" PageParameter="Two" />
                 <NavigationViewItemSeparator />
-                <local:NavigationViewItemEx Icon="Add" Content="Some Page 03" PageType="views:Page03" PageParameter="Three" />
-                <local:NavigationViewItemEx Icon="Add" Content="Some Page 04" PageType="views:Page04" PageParameter="Four" />
+                <local:NavigationViewItemEx Icon="OpenPane" Content="Some Page 03" PageType="views:Page03" PageParameter="Three" />
+                <local:NavigationViewItemEx Icon="Clear" Content="Some Page 04" PageType="views:Page04" PageParameter="Four" />
             </NavigationView.MenuItems>
             
             <NavigationView.PaneFooter>

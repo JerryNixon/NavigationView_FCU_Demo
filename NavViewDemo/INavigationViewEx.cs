@@ -11,6 +11,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -18,12 +19,15 @@ namespace NavViewDemo
 {
     public enum VisibleWhenTargets { Narrow, Wide, Both }
 
-    public interface INavigationViewItemHeaderEx 
+    public interface INavigationViewItemHeaderEx
     {
         VisibleWhenTargets VisibleWhen { get; set; }
+        object NarrowContent { get; set; }
+        object Content { get; set; }
+        void SetBaseContent(object content);
     }
 
-    public interface INavigationViewItemEx 
+    public interface INavigationViewItemEx
     {
         bool ClearBackStack { get; set; }
         object PageParameter { get; set; }
@@ -38,11 +42,33 @@ namespace NavViewDemo
         Type SettingsPageType { get; set; }
     }
 
+    [ContentProperty(Name = nameof(Content))]
     public class NavigationViewItemHeaderEx :
         NavigationViewItemHeader,
         INavigationViewItemHeaderEx
     {
         public VisibleWhenTargets VisibleWhen { get; set; } = VisibleWhenTargets.Both;
+
+        public void SetBaseContent(object content)
+            => base.Content = content;
+
+        public new object Content
+        {
+            get { return (object)GetValue(ContentProperty); }
+            set { SetValue(ContentProperty, value); }
+        }
+        public new static readonly DependencyProperty ContentProperty =
+            DependencyProperty.Register(nameof(Content), typeof(object),
+                typeof(INavigationViewItemHeaderEx), new PropertyMetadata(null));
+
+        public object NarrowContent
+        {
+            get { return (object)GetValue(NarrowContentProperty); }
+            set { SetValue(NarrowContentProperty, value); }
+        }
+        public static readonly DependencyProperty NarrowContentProperty =
+            DependencyProperty.Register(nameof(NarrowContent), typeof(object),
+                typeof(NavigationViewItemHeaderEx), new PropertyMetadata(null));
     }
 
     public class NavigationViewItemEx :
@@ -87,8 +113,8 @@ namespace NavViewDemo
                 }
             };
 
-            RegisterPropertyChangedCallback(DisplayModeProperty, (s, e) => UpdateHeaderVisibility());
-            RegisterPropertyChangedCallback(IsPaneOpenProperty, (s, e) => UpdateHeaderVisibility());
+            RegisterPropertyChangedCallback(DisplayModeProperty, (s, e) => UpdateHeaders());
+            RegisterPropertyChangedCallback(IsPaneOpenProperty, (s, e) => UpdateHeaders());
 
             _frame.Navigated += (s, e) =>
             {
@@ -101,29 +127,14 @@ namespace NavViewDemo
             };
         }
 
-        private void UpdateHeaderVisibility()
+        private void UpdateHeaders()
         {
             var items = MenuItems
                 .OfType<INavigationViewItemHeaderEx>()
-                .OfType<FrameworkElement>()
-                .Select(x => new { Element = x, Interface = x as INavigationViewItemHeaderEx });
+                .Where(x => x.NarrowContent != null);
             foreach (var item in items)
             {
-                switch (item.Interface.VisibleWhen)
-                {
-                    case VisibleWhenTargets.Narrow when (!IsPaneOpen):
-                        item.Element.Visibility = Visibility.Visible;
-                        break;
-                    case VisibleWhenTargets.Wide when (IsPaneOpen):
-                        item.Element.Visibility = Visibility.Visible;
-                        break;
-                    case VisibleWhenTargets.Both:
-                        item.Element.Visibility = Visibility.Visible;
-                        break;
-                    default:
-                        item.Element.Visibility = Visibility.Collapsed;
-                        break;
-                }
+                item.SetBaseContent(IsPaneOpen ? item.Content : item.NarrowContent);
             }
         }
 
