@@ -10,12 +10,23 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <local:NavigationViewEx x:Name="MainView" SettingsPageType="views:SettingsPage">
-            
+        <local:NavigationViewEx>
+            <local:NavigationViewEx.MenuItems>
+                <NavigationViewItem 
+                    Content="Page 01" Icon="Add" 
+                    local:NavigationViewAttached.PageType="views:Page01" />
+                <NavigationViewItem 
+                    Content="Page 02" Icon="Add" 
+                    local:NavigationViewAttached.PageType="views:Page02" />
+            </local:NavigationViewEx.MenuItems>
+        </local:NavigationViewEx>
+
+        <!--<local:NavigationViewEx x:Name="MainView" SettingsPageType="views:SettingsPage" ItemInvoked="MainView_ItemInvoked">
+
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox />
             </NavigationView.AutoSuggestBox>
-            
+
             <NavigationView.MenuItems>
                 <local:NavigationViewItemHeaderEx Content="Header 01" NarrowContent="01" />
                 <local:NavigationViewItemEx Icon="Home" Content="Home 01 (Clears BackStack)" PageType="views:Page01" PageParameter="One" ClearBackStack="True" />
@@ -24,14 +35,20 @@
                 <local:NavigationViewItemEx Icon="OpenPane" Content="Some Page 03" PageType="views:Page03" PageParameter="Three" />
                 <local:NavigationViewItemEx Icon="Clear" Content="Some Page 04" PageType="views:Page04" PageParameter="Four" />
             </NavigationView.MenuItems>
-            
+
+            <NavigationView.MenuItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="TEST"                     />
+                </DataTemplate>
+            </NavigationView.MenuItemTemplate>
+
             <NavigationView.PaneFooter>
                 <StackPanel>
                     <NavigationViewItem Icon="Contact" Content="Profile" />
                 </StackPanel>
             </NavigationView.PaneFooter>
-            
-        </local:NavigationViewEx>
+
+        </local:NavigationViewEx>-->
 
     </Grid>
 </Page>

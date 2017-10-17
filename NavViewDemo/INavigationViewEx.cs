@@ -19,7 +19,7 @@ namespace NavViewDemo
 {
     public enum VisibleWhenTargets { Narrow, Wide, Both }
 
-    public interface INavigationViewItemHeaderEx
+    public interface INavItemHeaderEx
     {
         VisibleWhenTargets VisibleWhen { get; set; }
         object NarrowContent { get; set; }
@@ -27,7 +27,7 @@ namespace NavViewDemo
         void SetBaseContent(object content);
     }
 
-    public interface INavigationViewItemEx
+    public interface INavItemEx
     {
         bool ClearBackStack { get; set; }
         object PageParameter { get; set; }
@@ -37,15 +37,15 @@ namespace NavViewDemo
 
     public interface INavigationViewEx
     {
-        event TypedEventHandler<INavigationViewEx, INavigationViewItemEx> SelectionChanged;
-        INavigationViewItemEx SelectedItem { get; set; }
+        event TypedEventHandler<INavigationViewEx, INavItemEx> SelectionChanged;
+        INavItemEx SelectedItem { get; set; }
         Type SettingsPageType { get; set; }
     }
 
     [ContentProperty(Name = nameof(Content))]
     public class NavigationViewItemHeaderEx :
         NavigationViewItemHeader,
-        INavigationViewItemHeaderEx
+        INavItemHeaderEx
     {
         public VisibleWhenTargets VisibleWhen { get; set; } = VisibleWhenTargets.Both;
 
@@ -59,7 +59,7 @@ namespace NavViewDemo
         }
         public new static readonly DependencyProperty ContentProperty =
             DependencyProperty.Register(nameof(Content), typeof(object),
-                typeof(INavigationViewItemHeaderEx), new PropertyMetadata(null));
+                typeof(INavItemHeaderEx), new PropertyMetadata(null));
 
         public object NarrowContent
         {
@@ -73,7 +73,7 @@ namespace NavViewDemo
 
     public class NavigationViewItemEx :
         NavigationViewItem,
-        INavigationViewItemEx
+        INavItemEx
     {
         public bool ClearBackStack { get; set; } = false;
         public NavigationTransitionInfo TransitionInfo { get; set; }
@@ -130,7 +130,7 @@ namespace NavViewDemo
         private void UpdateHeaders()
         {
             var items = MenuItems
-                .OfType<INavigationViewItemHeaderEx>()
+                .OfType<INavItemHeaderEx>()
                 .Where(x => x.NarrowContent != null);
             foreach (var item in items)
             {
@@ -138,13 +138,13 @@ namespace NavViewDemo
             }
         }
 
-        public new event TypedEventHandler<INavigationViewEx, INavigationViewItemEx> SelectionChanged;
+        public new event TypedEventHandler<INavigationViewEx, INavItemEx> SelectionChanged;
 
         public Type SettingsPageType { get; set; }
 
-        public new INavigationViewItemEx SelectedItem
+        public new INavItemEx SelectedItem
         {
-            get => (INavigationViewItemEx)GetValue(SelectedItemProperty) ?? base.SelectedItem as NavigationViewItemEx;
+            get => (INavItemEx)GetValue(SelectedItemProperty) ?? base.SelectedItem as NavigationViewItemEx;
             set
             {
                 if (value == null)
@@ -167,7 +167,7 @@ namespace NavViewDemo
             }
         }
 
-        private void SetSelectedItem(INavigationViewItemEx item)
+        private void SetSelectedItem(INavItemEx item)
         {
             if (item.ClearBackStack)
             {
@@ -179,7 +179,7 @@ namespace NavViewDemo
         }
 
         public new static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(INavigationViewItemEx),
+            DependencyProperty.Register(nameof(SelectedItem), typeof(INavItemEx),
                 typeof(NavigationViewEx), new PropertyMetadata(null));
 
         private class FrameEx : Frame
