@@ -10,7 +10,38 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <local:NavigationViewEx>
+        <local:NavViewEx SettingsPageType="views:SettingsPage">
+
+            <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="Items" />
+                <NavigationViewItem Icon="Home" Content="Item 01" local:NavProperties.PageType="views:Page01" />
+                <NavigationViewItem Icon="OpenFile" Content="Item 02" local:NavProperties.PageType="views:Page02" />
+                <NavigationViewItem Icon="ClosePane" Content="Item 03" local:NavProperties.PageType="views:Page03" />
+            </NavigationView.MenuItems>
+
+            <NavigationView.Header>
+            <CommandBar>
+                <CommandBar.Content>
+                    <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Jerry" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </CommandBar.Content>
+            </CommandBar>
+        </NavigationView.Header>
+
+        </local:NavViewEx>
+
+        <!--<NavigationView.Header>
+            <CommandBar>
+                <CommandBar.Content>
+                    <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
+                        <TextBlock x:Name="Header" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </CommandBar.Content>
+            </CommandBar>
+        </NavigationView.Header>-->
+
+        <!--<local:NavigationViewEx>
             <local:NavigationViewEx.MenuItems>
                 <NavigationViewItem 
                     Content="Page 01" Icon="Add" 
@@ -19,7 +50,7 @@
                     Content="Page 02" Icon="Add" 
                     local:NavigationViewAttached.PageType="views:Page02" />
             </local:NavigationViewEx.MenuItems>
-        </local:NavigationViewEx>
+        </local:NavigationViewEx>-->
 
         <!--<local:NavigationViewEx x:Name="MainView" SettingsPageType="views:SettingsPage" ItemInvoked="MainView_ItemInvoked">
 
