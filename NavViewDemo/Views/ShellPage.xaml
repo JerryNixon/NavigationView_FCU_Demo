@@ -10,7 +10,20 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <local:NavViewEx SettingsPageType="views:SettingsPage">
+        <local:NavViewEx SettingsPageType="views:SettingsPage" x:Name="MyNavigationView">
+
+            <NavigationView.HeaderTemplate>
+                <DataTemplate>
+                    <CommandBar>
+                        <CommandBar.Content>
+                            <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
+                                <TextBlock Text="{Binding}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+                            </Grid>
+                        </CommandBar.Content>
+                        <AppBarButton Icon="Setting" Click="SettingsAppBarButton_Click" />
+                    </CommandBar>
+                </DataTemplate>
+            </NavigationView.HeaderTemplate>
 
             <NavigationView.MenuItems>
                 <NavigationViewItemHeader Content="Items" />
@@ -20,14 +33,14 @@
             </NavigationView.MenuItems>
 
             <NavigationView.Header>
-            <CommandBar>
-                <CommandBar.Content>
-                    <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Jerry" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
-                    </Grid>
-                </CommandBar.Content>
-            </CommandBar>
-        </NavigationView.Header>
+                <CommandBar>
+                    <CommandBar.Content>
+                        <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
+                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Jerry" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </CommandBar.Content>
+                </CommandBar>
+            </NavigationView.Header>
 
         </local:NavViewEx>
 

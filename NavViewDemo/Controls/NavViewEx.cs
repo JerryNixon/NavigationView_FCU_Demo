@@ -6,17 +6,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace NavViewDemo
 {
-    public partial class NavProperties : DependencyObject
-    {
-        public static Type GetPageType(NavigationViewItem obj)
-            => (Type)obj.GetValue(PageTypeProperty);
-        public static void SetPageType(NavigationViewItem obj, Type value)
-            => obj.SetValue(PageTypeProperty, value);
-        public static readonly DependencyProperty PageTypeProperty =
-            DependencyProperty.RegisterAttached("PageType", typeof(Type),
-                typeof(NavProperties), new PropertyMetadata(null));
-    }
-
     public class NavViewEx : NavigationView
     {
         Frame _frame;
@@ -29,36 +18,19 @@ namespace NavViewDemo
             _frame.Navigated += Frame_Navigated;
             ItemInvoked += NavViewEx_ItemInvoked;
             SystemNavigationManager.GetForCurrentView().BackRequested += ShellPage_BackRequested;
-            RegisterPropertyChangedCallback(IsPaneOpenProperty, IsPaneOpenChanged); 
-        }
-
-        private void IsPaneOpenChanged(DependencyObject sender, DependencyProperty dp)
-        {
-            foreach (var item in MenuItems.OfType<NavigationViewItemHeader>())
+            RegisterPropertyChangedCallback(IsPaneOpenProperty, IsPaneOpenChanged);
+            Loaded += (s, e) =>
             {
-                item.Visibility = IsPaneOpen ? Visibility.Visible : Visibility.Collapsed;
-            }
+                if (FindStart() is NavigationViewItem i && i != null)
+                    Navigate(i.GetValue(NavProperties.PageTypeProperty) as Type);
+            };
         }
 
-        private void NavViewEx_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
-            if (args.IsSettingsInvoked)
-                SelectedItem = SettingsItem;
-            else
-                SelectedItem = Find(args.InvokedItem.ToString());
-        }
+        public void Navigate(Type type)
+            => Navigate(_frame, type);
 
-        private void Frame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
-            => SelectedItem = Find(e.SourcePageType);
-
-        private void ShellPage_BackRequested(object sender, BackRequestedEventArgs e)
-            => _frame.GoBack();
-
-        NavigationViewItem Find(string content)
-            => MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Content.Equals(content));
-
-        NavigationViewItem Find(Type type)
-            => MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => type.Equals(x.GetValue(NavProperties.PageTypeProperty)));
+        public virtual void Navigate(Frame frame, Type type)
+            => frame.Navigate(type);
 
         public new object SelectedItem
         {
@@ -66,24 +38,63 @@ namespace NavViewDemo
             {
                 if (value == SettingsItem)
                 {
-                    _frame.Navigate(SettingsPageType);
+                    Navigate(SettingsPageType);
                     base.SelectedItem = value;
                     _frame.BackStack.Clear();
                 }
                 else if (value is NavigationViewItem i && i != null)
                 {
-                    _frame.Navigate(i.GetValue(NavProperties.PageTypeProperty) as Type);
+                    Navigate(i.GetValue(NavProperties.PageTypeProperty) as Type);
                     base.SelectedItem = value;
                     _frame.BackStack.Clear();
                 }
                 UpdateBackButton();
+                UpdateHeader();
             }
         }
 
-        private void UpdateBackButton()
+        private NavigationViewItem FindStart()
+            => MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => (bool)x.GetValue(NavProperties.IsStartPageProperty));
+
+        private void IsPaneOpenChanged(DependencyObject sender, DependencyProperty dp)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                (_frame.CanGoBack) ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            foreach (var item in MenuItems.OfType<NavigationViewItemHeader>())
+            {
+                item.Opacity = IsPaneOpen ? 1 : 0;
+            }
         }
+
+        private void NavViewEx_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+            => SelectedItem = (args.IsSettingsInvoked) ? SettingsItem : Find(args.InvokedItem.ToString());
+
+        private void Frame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+            => SelectedItem = (e.SourcePageType == SettingsPageType) ? SettingsItem : Find(e.SourcePageType) ?? base.SelectedItem;
+
+        private void UpdateHeader()
+        {
+            if (_frame.Content is Page p && p.GetValue(NavProperties.HeaderProperty) is string s && !string.IsNullOrEmpty(s))
+            {
+                Header = s;
+            }
+        }
+
+        private void ShellPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (_frame.CanGoBack)
+            {
+                _frame.GoBack();
+            }
+        }
+
+        private NavigationViewItem Find(string content)
+            => MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Content.Equals(content));
+
+        private NavigationViewItem Find(Type type)
+            => MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => type.Equals(x.GetValue(NavProperties.PageTypeProperty)));
+
+
+        private void UpdateBackButton()
+            => SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                (_frame.CanGoBack) ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
     }
 }
