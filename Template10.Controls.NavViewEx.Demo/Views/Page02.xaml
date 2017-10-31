@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="Demo.Views.Page02"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Uid="Page02"
+    xmlns:controls="using:Demo.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto"
+                      VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled">
+            <controls:RichTextColumns Margin="16">
+                <controls:RichTextColumns.ColumnTemplate>
+                    <DataTemplate>
+                        <RichTextBlockOverflow Width="250" Margin="40,0,0,0" />
+                    </DataTemplate>
+                </controls:RichTextColumns.ColumnTemplate>
+                <controls:RichTextColumns.RichTextContent>
+                    <RichTextBlock x:Name="ContentTextBlock" Width="250" TextWrapping="Wrap" />
+                </controls:RichTextColumns.RichTextContent>
+            </controls:RichTextColumns>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

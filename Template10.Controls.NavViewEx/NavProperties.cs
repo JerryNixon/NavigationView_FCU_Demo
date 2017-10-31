@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace NavViewDemo.Controls
+namespace Template10.Controls
 {
     public partial class NavProperties : DependencyObject
     {
@@ -30,4 +30,5 @@ namespace NavViewDemo.Controls
             DependencyProperty.RegisterAttached("Header", typeof(string),
                 typeof(NavProperties), new PropertyMetadata(null));
     }
+
 }

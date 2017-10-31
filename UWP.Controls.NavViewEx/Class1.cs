@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Linq;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
-namespace NavViewDemo.Controls
+namespace UWP.Controls.NavViewEx
 {
     public class NavViewEx : NavigationView
     {
@@ -97,4 +93,5 @@ namespace NavViewDemo.Controls
             => SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 (_frame.CanGoBack) ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
     }
+
 }

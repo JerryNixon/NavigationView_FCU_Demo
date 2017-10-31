@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="Demo.Views.Page01"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    x:Uid="Page01" x:Name="ThisPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        
+        <DataTemplate x:Name="Page01ItemTemplate">
+            <Grid Background="Silver" Height="100" Width="100">
+                <TextBlock Text="{Binding}" Style="{ThemeResource HeaderTextBlockStyle}" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Name="Page01HeaderTemplate">
+            <TextBlock Text="{Binding Title}" Style="{ThemeResource TitleTextBlockStyle}"/>
+        </DataTemplate>
+
+        <CollectionViewSource x:Name="CVS" Source="{Binding Items, ElementName=ThisPage}" 
+                              ItemsPath="Items" IsSourceGrouped="True" />
+
+    </Page.Resources>
+        
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <GridView Padding="8,8,0,0" 
+                  ItemsSource="{Binding Source={StaticResource CVS}}" 
+                  ItemTemplate="{StaticResource Page01ItemTemplate}">
+            <GridView.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource Page01HeaderTemplate}" />
+            </GridView.GroupStyle>
+        </GridView>
+
+    </Grid>
+</Page>

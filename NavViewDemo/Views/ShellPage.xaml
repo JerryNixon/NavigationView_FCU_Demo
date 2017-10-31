@@ -2,7 +2,7 @@
     x:Class="NavViewDemo.ShellPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:NavViewDemo"
+    xmlns:controls="using:NavViewDemo.Controls"
     xmlns:views="using:NavViewDemo.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,89 +10,29 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <local:NavViewEx SettingsPageType="views:SettingsPage" x:Name="MyNavigationView">
-
-            <NavigationView.HeaderTemplate>
-                <DataTemplate>
-                    <CommandBar>
-                        <CommandBar.Content>
-                            <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
-                                <TextBlock Text="{Binding}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
-                            </Grid>
-                        </CommandBar.Content>
-                        <AppBarButton Icon="Setting" Click="SettingsAppBarButton_Click" />
-                    </CommandBar>
-                </DataTemplate>
-            </NavigationView.HeaderTemplate>
-
-            <NavigationView.MenuItems>
-                <NavigationViewItemHeader Content="Items" />
-                <NavigationViewItem Icon="Home" Content="Item 01" local:NavProperties.PageType="views:Page01" />
-                <NavigationViewItem Icon="OpenFile" Content="Item 02" local:NavProperties.PageType="views:Page02" />
-                <NavigationViewItem Icon="ClosePane" Content="Item 03" local:NavProperties.PageType="views:Page03" />
-            </NavigationView.MenuItems>
-
-            <NavigationView.Header>
+        <Grid.Resources>
+            <DataTemplate x:Name="NavViewHeaderTemplate">
                 <CommandBar>
                     <CommandBar.Content>
                         <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
-                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Jerry" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+                            <TextBlock Text="{Binding}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
                         </Grid>
                     </CommandBar.Content>
+                    <AppBarButton Icon="Setting" Click="SettingsAppBarButton_Click" />
                 </CommandBar>
-            </NavigationView.Header>
+            </DataTemplate>
+        </Grid.Resources>
 
-        </local:NavViewEx>
-
-        <!--<NavigationView.Header>
-            <CommandBar>
-                <CommandBar.Content>
-                    <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
-                        <TextBlock x:Name="Header" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
-                    </Grid>
-                </CommandBar.Content>
-            </CommandBar>
-        </NavigationView.Header>-->
-
-        <!--<local:NavigationViewEx>
-            <local:NavigationViewEx.MenuItems>
-                <NavigationViewItem 
-                    Content="Page 01" Icon="Add" 
-                    local:NavigationViewAttached.PageType="views:Page01" />
-                <NavigationViewItem 
-                    Content="Page 02" Icon="Add" 
-                    local:NavigationViewAttached.PageType="views:Page02" />
-            </local:NavigationViewEx.MenuItems>
-        </local:NavigationViewEx>-->
-
-        <!--<local:NavigationViewEx x:Name="MainView" SettingsPageType="views:SettingsPage" ItemInvoked="MainView_ItemInvoked">
-
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox />
-            </NavigationView.AutoSuggestBox>
+        <controls:NavViewEx x:Name="MyNavigationView" x:FieldModifier="Public" SettingsPageType="views:SettingsPage" HeaderTemplate="{StaticResource NavViewHeaderTemplate}">
 
             <NavigationView.MenuItems>
-                <local:NavigationViewItemHeaderEx Content="Header 01" NarrowContent="01" />
-                <local:NavigationViewItemEx Icon="Home" Content="Home 01 (Clears BackStack)" PageType="views:Page01" PageParameter="One" ClearBackStack="True" />
-                <local:NavigationViewItemEx Icon="Accept" Content="Some Page 02" PageType="views:Page02" PageParameter="Two" />
-                <NavigationViewItemSeparator />
-                <local:NavigationViewItemEx Icon="OpenPane" Content="Some Page 03" PageType="views:Page03" PageParameter="Three" />
-                <local:NavigationViewItemEx Icon="Clear" Content="Some Page 04" PageType="views:Page04" PageParameter="Four" />
+                <NavigationViewItemHeader Content="Items" />
+                <NavigationViewItem Icon="Home" Content="Item 01" controls:NavProperties.PageType="views:Page01" controls:NavProperties.IsStartPage="True" />
+                <NavigationViewItem Icon="OpenFile" Content="Item 02" controls:NavProperties.PageType="views:Page02" />
+                <NavigationViewItem Icon="ClosePane" Content="Item 03" controls:NavProperties.PageType="views:Page03" />
             </NavigationView.MenuItems>
 
-            <NavigationView.MenuItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="TEST"                     />
-                </DataTemplate>
-            </NavigationView.MenuItemTemplate>
-
-            <NavigationView.PaneFooter>
-                <StackPanel>
-                    <NavigationViewItem Icon="Contact" Content="Profile" />
-                </StackPanel>
-            </NavigationView.PaneFooter>
-
-        </local:NavigationViewEx>-->
+        </controls:NavViewEx>
 
     </Grid>
 </Page>

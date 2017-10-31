@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="Demo.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    x:Uid="SettingsPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="16">
+        
+        <TextBlock Text="Settings" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" SelectionChanged="TextBlock_SelectionChanged" />
+
+        <ToggleSwitch Header="Extend into title" Margin="0,16,0,0" />
+
+        <TextBlock Text="Developer (c) 2017" Margin="0,16,0,0" Style="{StaticResource CaptionTextBlockStyle}" Opacity=".5" />
+
+    </StackPanel>
+</Page>
