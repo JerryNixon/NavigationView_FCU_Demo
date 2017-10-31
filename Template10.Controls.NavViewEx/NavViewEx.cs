@@ -42,7 +42,7 @@ namespace Template10.Controls
 
         public enum HeaderBehaviors { Hide, Remove, None }
 
-        public HeaderBehaviors HeaderBehavior { get; set; } = HeaderBehaviors.Hide;
+        public HeaderBehaviors HeaderBehavior { get; set; } = HeaderBehaviors.Remove;
 
         public void Navigate(Type type)
         {

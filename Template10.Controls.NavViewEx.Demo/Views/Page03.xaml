@@ -21,20 +21,20 @@
                     <Setter Property="Margin" Value="0,0,0,16" />
                 </Style>
             </StackPanel.Resources>
-            <TextBlock Text="User profile" Style="{StaticResource HeaderTextBlockStyle}" />
-            <TextBlock Text="New record" Style="{StaticResource SubheaderTextBlockStyle}" />
-            <TextBox Header="First Name" />
-            <TextBox Header="Middle Name" />
-            <TextBox Header="Last Name" />
-            <TextBox Header="Email address" />
-            <ComboBox SelectedIndex="0" Header="Gender">
+            <TextBlock x:Uid="UserPageHeader" Style="{StaticResource HeaderTextBlockStyle}" />
+            <TextBlock x:Uid="UserPageSubheader" Style="{StaticResource SubheaderTextBlockStyle}" />
+            <TextBox x:Uid="UserPageFirstName" PlaceholderText="Jerry" />
+            <TextBox x:Uid="UserPageMiddleName" />
+            <TextBox x:Uid="UserPageLastName" PlaceholderText="Nixon" />
+            <TextBox x:Uid="UserPageEmail" PlaceholderText="jnixon@microsoft.com" />
+            <ComboBox SelectedIndex="0" x:Uid="UserPageGender">
                 <ComboBox.Items>
                     <ComboBoxItem>Male</ComboBoxItem>
                     <ComboBoxItem>Female</ComboBoxItem>
                 </ComboBox.Items>
             </ComboBox>
-            <CheckBox Content="Administrator" />
-            <Button>Create</Button>
+            <CheckBox x:Uid="UserPageAdmin" />
+            <Button x:Uid="UserPageCreate" /> 
         </StackPanel>
 
     </Grid>

@@ -117,16 +117,96 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Item01Button.Content" xml:space="preserve">
+    <value>Catalog</value>
+    <comment>Hamburger</comment>
+  </data>
+  <data name="Item01Button.Icon" xml:space="preserve">
+    <value>Home</value>
+    <comment>Hamburger</comment>
+  </data>
+  <data name="Item02Button.Content" xml:space="preserve">
+    <value>Document</value>
+    <comment>Hamburger</comment>
+  </data>
+  <data name="Item02Button.Icon" xml:space="preserve">
+    <value>OpenFile</value>
+    <comment>Hamburger</comment>
+  </data>
+  <data name="Item03Button.Content" xml:space="preserve">
+    <value>User form</value>
+    <comment>Hamburger</comment>
+  </data>
+  <data name="Item03Button.Icon" xml:space="preserve">
+    <value>ClosePane</value>
+    <comment>Hamburger</comment>
+  </data>
+  <data name="MenuHeader.Content" xml:space="preserve">
+    <value>Pages</value>
+    <comment>Hamburger</comment>
+  </data>
   <data name="Page01.[using:Template10.Controls]NavProperties.Header" xml:space="preserve">
     <value>Page 01 Title</value>
+    <comment>Page 01 Title</comment>
   </data>
   <data name="Page02.[using:Template10.Controls]NavProperties.Header" xml:space="preserve">
     <value>Page 02 Title</value>
+    <comment>Page 02 Title</comment>
   </data>
   <data name="Page03.[using:Template10.Controls]NavProperties.Header" xml:space="preserve">
     <value>Page 03 Title</value>
+    <comment>Page 03 Title</comment>
+  </data>
+  <data name="SettingsCopywrite.Text" xml:space="preserve">
+    <value>Developer (c) 2017</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="SettingsDoSomething.Header" xml:space="preserve">
+    <value>Do something neat</value>
+    <comment>Settings</comment>
   </data>
   <data name="SettingsPage.[using:Template10.Controls]NavProperties.Header" xml:space="preserve">
     <value>Settings Page Title</value>
+    <comment>Settings Title</comment>
+  </data>
+  <data name="SettingsPageHeader.Text" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="UserPageAdmin.Content" xml:space="preserve">
+    <value>Administrator</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageCreate.Content" xml:space="preserve">
+    <value>Create</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageEmail.Header" xml:space="preserve">
+    <value>Email address</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageFirstName.Header" xml:space="preserve">
+    <value>First name</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageGender.Header" xml:space="preserve">
+    <value>Gender</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageHeader.Text" xml:space="preserve">
+    <value>User Profile</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageLastName.Header" xml:space="preserve">
+    <value>Last name</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageMiddleName.Header" xml:space="preserve">
+    <value>Middle name</value>
+    <comment>User</comment>
+  </data>
+  <data name="UserPageSubheader.Text" xml:space="preserve">
+    <value>User Profile</value>
+    <comment>User</comment>
   </data>
 </root>

@@ -31,11 +31,12 @@ namespace Demo.Views
         {
             get
             {
-                yield return new { Title = "First", Items = Enumerable.Range(1, 8) };
-                yield return new { Title = "Second", Items = Enumerable.Range(1, 8) };
-                yield return new { Title = "Third", Items = Enumerable.Range(1, 8) };
-                yield return new { Title = "Fourth", Items = Enumerable.Range(1, 8) };
-                yield return new { Title = "Fifth", Items = Enumerable.Range(1, 8) };
+                var r = new Random((int)DateTime.Now.Ticks);
+                yield return new { Title = "First", Items = Enumerable.Range(1, r.Next(5, 16)) };
+                yield return new { Title = "Second", Items = Enumerable.Range(1, r.Next(5, 16)) };
+                yield return new { Title = "Third", Items = Enumerable.Range(1, r.Next(5, 16)) };
+                yield return new { Title = "Fourth", Items = Enumerable.Range(1, r.Next(5, 16)) };
+                yield return new { Title = "Fifth", Items = Enumerable.Range(1, r.Next(5, 16)) };
             }
         }
     }

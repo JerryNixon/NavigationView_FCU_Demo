@@ -10,7 +10,7 @@
 
     <Page.Resources>
         <DataTemplate x:Name="NavViewHeaderTemplate">
-            <CommandBar RequestedTheme="Dark">
+            <CommandBar>
                 <CommandBar.Content>
                     <Grid Margin="12,5,0,11" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
@@ -21,16 +21,15 @@
         </DataTemplate>
     </Page.Resources>
 
-
     <controls:NavViewEx x:Name="MainNavigationView" x:FieldModifier="Public" 
                             HeaderTemplate="{StaticResource NavViewHeaderTemplate}" 
                             SettingsPageType="views:SettingsPage">
 
         <NavigationView.MenuItems>
-            <NavigationViewItemHeader Content="Items" />
-            <NavigationViewItem Icon="Home" Content="Item 01" controls:NavProperties.PageType="views:Page01" controls:NavProperties.IsStartPage="True" />
-            <NavigationViewItem Icon="OpenFile" Content="Item 02" controls:NavProperties.PageType="views:Page02" />
-            <NavigationViewItem Icon="ClosePane" Content="Item 03" controls:NavProperties.PageType="views:Page03" />
+            <NavigationViewItemHeader x:Uid="MenuHeader" />
+            <NavigationViewItem x:Uid="Item01Button" controls:NavProperties.PageType="views:Page01" controls:NavProperties.IsStartPage="True" />
+            <NavigationViewItem x:Uid="Item02Button" controls:NavProperties.PageType="views:Page02" />
+            <NavigationViewItem x:Uid="Item03Button" controls:NavProperties.PageType="views:Page03" />
         </NavigationView.MenuItems>
 
     </controls:NavViewEx>

@@ -9,11 +9,11 @@
     
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="16">
         
-        <TextBlock Text="Settings" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" SelectionChanged="TextBlock_SelectionChanged" />
+        <TextBlock x:Uid="SettingsPageHeader" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" SelectionChanged="TextBlock_SelectionChanged" />
 
-        <ToggleSwitch Header="Extend into title" Margin="0,16,0,0" />
+        <ToggleSwitch x:Uid="SettingsDoSomething" Margin="0,16,0,0" />
 
-        <TextBlock Text="Developer (c) 2017" Margin="0,16,0,0" Style="{StaticResource CaptionTextBlockStyle}" Opacity=".5" />
+        <TextBlock x:Uid="SettingsCopywrite"  Margin="0,16,0,0" Style="{StaticResource CaptionTextBlockStyle}" Opacity=".5" />
 
     </StackPanel>
 </Page>
